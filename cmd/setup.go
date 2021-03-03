@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"crypto/tls"
+	//"crypto/tls"
 	golog "log"
 	//"net"
 	"net/http"
@@ -10,13 +10,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mdbraber/acmeproxy/acmeproxy"
-	aplog "github.com/mdbraber/acmeproxy/log"
-	"github.com/mholt/certmagic"
+	"github.com/zaxbux/acmeproxy/acmeproxy"
+	aplog "github.com/zaxbux/acmeproxy/log"
+	//"github.com/mholt/certmagic"
 	log "github.com/sirupsen/logrus"
-	"github.com/go-acme/lego/v3/certcrypto"
-	xlog "github.com/go-acme/lego/v3/log"
-	"github.com/go-acme/lego/v3/providers/dns"
+	"github.com/go-acme/lego/v4/certcrypto"
+	//xlog "github.com/go-acme/lego/v4/log"
+	"github.com/go-acme/lego/v4/providers/dns"
 	"gopkg.in/urfave/cli.v1"
 )
 
@@ -134,6 +134,7 @@ func newHttpServer(ctx *cli.Context) *http.Server {
 	}
 
 	switch ctx.GlobalString("ssl") {
+	/* - Don't care about embedded SSL
 	case SSLModeManual:
 		log.Info("Setting up server using SSL (manual)")
 		tlsConfig := &tls.Config{
@@ -191,6 +192,7 @@ func newHttpServer(ctx *cli.Context) *http.Server {
 			salog.WithField("error", magicErr.Error()).Fatal("Problem setting up certificates for ssl.auto")
 		}
 		server.TLSConfig = magic.TLSConfig()
+	*/
 	default:
 		log.Info("Setting up server (HTTP)")
 	}
